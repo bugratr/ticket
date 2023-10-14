@@ -1,0 +1,17 @@
+body {
+    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: #50b3a2;
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+}
