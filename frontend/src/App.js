@@ -1,35 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React from 'react';
+import Home from './Home';
+import AdminPanel from './AdminPanel';
+import Login from './Login';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 function App() {
-  const [events, setEvents] = useState([]);
+    const { isLoggedIn } = useAuth();
 
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        const response = await fetch('http://localhost:3001/events');
-        const data = await response.json();
-        setEvents(data);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    }
-
-    fetchEvents();
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>Ticketing System</h1>
-      <ul>
-        {events.map((event, index) => (
-          <li key={index}>
-            {event.name} at {event.venue} on {event.date}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    return (
+        <AuthProvider>
+            <div className="App">
+                {isLoggedIn ? <AdminPanel /> : <Login />}
+                <Home />
+            </div>
+        </AuthProvider>
+    );
 }
 
 export default App;
